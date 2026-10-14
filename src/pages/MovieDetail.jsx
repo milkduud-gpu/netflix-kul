@@ -23,6 +23,7 @@ export default function MovieDetail() {
     <>
       <section className="hero detail" style={posterStyle(movie)}>
         <div className="hero-shade" />
+        <img className="hero-poster" src={movie.poster} alt="" />
         <div className="hero-body">
           <button className="link back" onClick={() => navigate(-1)}>← Back</button>
           <h1>{movie.title}</h1>

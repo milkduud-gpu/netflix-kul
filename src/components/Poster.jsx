@@ -9,7 +9,7 @@ export function posterStyle(m) {
 export default function Poster({ movie }) {
   return (
     <Link to={`/movie/${movie.id}`} className="poster" style={posterStyle(movie)} aria-label={movie.title}>
-      <span className="poster-title">{movie.title}</span>
+      <img src={movie.poster} alt="" loading="lazy" />
       <span className="poster-hover">
         <strong>{movie.title}</strong>
         <small>{movie.year} · {movie.rating} · {movie.genre}</small>

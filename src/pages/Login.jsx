@@ -29,13 +29,13 @@ export default function Login() {
   }
 
   return (
-    <div className="login-wrap">
+    <main className="login-wrap">
       <span className="logo big">NETFLIX-KUL</span>
       <form className="login-card" onSubmit={submit} noValidate>
         <h1>Sign In</h1>
         {errors.form && <p className="error banner" role="alert">{errors.form}</p>}
         <label htmlFor="email">Email</label>
-        <input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)}
+        <input id="email" type="email" autoFocus value={email} onChange={(e) => setEmail(e.target.value)}
           className={errors.email ? 'invalid' : ''} autoComplete="email" />
         {errors.email && <p className="error">{errors.email}</p>}
         <label htmlFor="password">Password</label>
@@ -49,6 +49,6 @@ export default function Login() {
         <button type="submit" className="btn red full">Sign In</button>
         <p className="hint">Demo account: {DEMO_USER.email} / {DEMO_USER.password}</p>
       </form>
-    </div>
+    </main>
   )
 }

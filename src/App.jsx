@@ -15,8 +15,9 @@ function Protected() {
   if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
   return (
     <>
+      <a href="#main" className="skip">Skip to content</a>
       <Navbar />
-      <main>
+      <main id="main" tabIndex={-1} key={location.pathname}>
         <Outlet />
       </main>
     </>

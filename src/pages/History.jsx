@@ -37,7 +37,7 @@ export default function History() {
         {items.map(({ movie, at }) => (
           <li key={movie.id}>
             <Link to={`/movie/${movie.id}`}>
-              <span className="thumb" style={posterStyle(movie)} />
+              <span className="thumb" style={posterStyle(movie)}><img src={movie.poster} alt="" /></span>
               <span>
                 <strong>{movie.title}</strong>
                 <small className="muted">{movie.genre} · {new Date(at).toLocaleDateString()}</small>

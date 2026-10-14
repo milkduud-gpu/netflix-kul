@@ -10,9 +10,9 @@ export default function Genres() {
       <div className="page">
         <h1>Genres</h1>
         <div className="genre-grid">
-          {GENRES.map((g, i) => (
+          {GENRES.map((g) => (
             <Link key={g} to={`/genres/${g}`} className="genre-tile"
-              style={{ background: `linear-gradient(135deg, hsl(${i * 70} 60% 30%), #181818)` }}>
+              style={{ backgroundImage: `linear-gradient(#0009, #000d), url(${MOVIES.find((m) => m.genre === g)?.poster})` }}>
               {g}
             </Link>
           ))}

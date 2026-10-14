@@ -14,6 +14,7 @@ export default function Home() {
     <>
       <section className="hero" style={posterStyle(featured)}>
         <div className="hero-shade" />
+        <img className="hero-poster" src={featured.poster} alt="" />
         <div className="hero-body">
           <h1>{featured.title}</h1>
           <p>{featured.description}</p>

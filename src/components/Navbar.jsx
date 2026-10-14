@@ -51,6 +51,9 @@ export default function Navbar() {
             value={q}
             onChange={onSearch}
             onBlur={() => !q && setOpen(false)}
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') navigate('/')
+            }}
           />
         )}
         <button className="icon-btn" aria-label="Search" onClick={() => setOpen(true)}>
