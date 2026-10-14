@@ -55,7 +55,8 @@ h2 { font-size: 1.2rem; margin: 24px 0 8px; }
 .page { padding: 100px 4% 60px; max-width: 1200px; margin: 0 auto; }
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
 .grid .poster { width: auto; }
-.genre-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.genre-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+.page > h1 { margin-bottom: 24px; }
 .genre-tile { display: flex; align-items: center; justify-content: center; min-height: 120px; border-radius: 4px; font-size: 1.4rem; font-weight: 800; transition: transform .2s; }
 .genre-tile:hover { transform: scale(1.04); }
 .empty { text-align: center; padding-top: 140px; }

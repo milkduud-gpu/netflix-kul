@@ -5,6 +5,14 @@ import Poster from '../components/Poster.jsx'
 export default function Search() {
   const [params] = useSearchParams()
   const q = (params.get('q') ?? '').trim().toLowerCase()
+  if (!q) {
+    return (
+      <div className="page empty">
+        <p>Type a title or genre to search</p>
+        <Link to="/" className="btn white">Back to Home</Link>
+      </div>
+    )
+  }
   const results = MOVIES.filter((m) => m.title.toLowerCase().includes(q) || m.genre.toLowerCase().includes(q))
 
   return (

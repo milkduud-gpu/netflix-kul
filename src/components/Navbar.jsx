@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
+import { NavLink, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 import { useApp } from '../context.jsx'
 
 export default function Navbar() {
   const { user, logout } = useApp()
   const navigate = useNavigate()
+  const { pathname } = useLocation()
   const [params] = useSearchParams()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -17,10 +18,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  // Leaving the search results (e.g. "Clear search") resets and closes the box.
+  useEffect(() => {
+    if (pathname !== '/search') {
+      setQ('')
+      setOpen(false)
+    }
+  }, [pathname])
+
   function onSearch(e) {
     const value = e.target.value
     setQ(value)
-    navigate(value.trim() ? `/search?q=${encodeURIComponent(value)}` : '/')
+    // Replace while already on results so Back doesn't step through every keystroke.
+    navigate(value.trim() ? `/search?q=${encodeURIComponent(value)}` : '/', { replace: window.location.pathname === '/search' })
   }
 
   return (
