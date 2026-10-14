@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import { Navigate, useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation } from 'react-router-dom'
 import { useApp } from '../context.jsx'
 import { DEMO_USER } from '../data.js'
 
 export default function Login() {
   const { user, login } = useApp()
-  const navigate = useNavigate()
   const location = useLocation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [show, setShow] = useState(false)
   const [errors, setErrors] = useState({})
 
-  if (user) return <Navigate to="/" replace />
+  // Once signed in, return to the page the user originally asked for.
+  if (user) return <Navigate to={location.state?.from ?? '/'} replace />
 
   function submit(e) {
     e.preventDefault()
@@ -20,9 +20,7 @@ export default function Login() {
     if (!email.trim()) next.email = 'Enter your email'
     if (!password) next.password = 'Enter your password'
     if (Object.keys(next).length) return setErrors(next)
-    if (login(email, password)) {
-      navigate(location.state?.from ?? '/', { replace: true })
-    } else {
+    if (!login(email, password)) {
       setErrors({ form: 'Incorrect email or password' })
       setPassword('')
     }
