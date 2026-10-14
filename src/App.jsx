@@ -1,0 +1,41 @@
+import { Navigate, Outlet, Route, Routes, useLocation } from 'react-router-dom'
+import { useApp } from './context.jsx'
+import Navbar from './components/Navbar.jsx'
+import Login from './pages/Login.jsx'
+import Home from './pages/Home.jsx'
+import History from './pages/History.jsx'
+import Genres from './pages/Genres.jsx'
+import Search from './pages/Search.jsx'
+import MovieDetail from './pages/MovieDetail.jsx'
+import NotFound from './pages/NotFound.jsx'
+
+function Protected() {
+  const { user } = useApp()
+  const location = useLocation()
+  if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
+    </>
+  )
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route element={<Protected />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/genres" element={<Genres />} />
+        <Route path="/genres/:name" element={<Genres />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
+  )
+}
