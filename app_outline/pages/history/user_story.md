@@ -4,6 +4,7 @@
 
 ## On this page
 - List of watched movies, newest first: poster, title, genre, date watched. Tap → `/movie/:id`
+- **Clear history** button (top right) → confirm dialog "Clear your watch history?" [Cancel] [Clear history]. Confirming empties the list and top genres.
 - "Your top genres" section: genres ranked by how many movies the user watched in each
 
 ## States
@@ -13,3 +14,4 @@
 - [ ] The 2 seeded watched movies show newest first
 - [ ] Watching a new movie adds it to the top of the list
 - [ ] Top genres update after watching a movie
+- [ ] Clear history asks first; Cancel keeps everything, confirming shows the empty state and hides Continue Watching on Home

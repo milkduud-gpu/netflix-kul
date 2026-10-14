@@ -22,8 +22,10 @@ export function AppProvider({ children }) {
     setWatched((w) => [{ id, at: Date.now() }, ...w.filter((x) => x.id !== id)])
   }
 
+  const clearHistory = () => setWatched([])
+
   return (
-    <AppContext.Provider value={{ user, login, logout, watched, watch }}>
+    <AppContext.Provider value={{ user, login, logout, watched, watch, clearHistory }}>
       {children}
     </AppContext.Provider>
   )

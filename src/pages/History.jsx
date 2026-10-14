@@ -1,10 +1,12 @@
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../context.jsx'
 import { MOVIES } from '../data.js'
 import { posterStyle } from '../components/Poster.jsx'
 
 export default function History() {
-  const { watched } = useApp()
+  const { watched, clearHistory } = useApp()
+  const dialog = useRef(null)
   const items = watched
     .map((w) => ({ ...w, movie: MOVIES.find((m) => m.id === w.id) }))
     .filter((w) => w.movie)
@@ -25,7 +27,18 @@ export default function History() {
 
   return (
     <div className="page">
-      <h1>History</h1>
+      <div className="page-head">
+        <h1>History</h1>
+        <button className="btn gray" onClick={() => dialog.current.showModal()}>Clear history</button>
+      </div>
+      <dialog ref={dialog} className="confirm" aria-labelledby="clear-title">
+        <h2 id="clear-title">Clear your watch history?</h2>
+        <p className="muted">This removes all {items.length} watched movies and your top genres. It can't be undone.</p>
+        <div className="confirm-actions">
+          <button className="btn gray" autoFocus onClick={() => dialog.current.close()}>Cancel</button>
+          <button className="btn red" onClick={() => { clearHistory(); dialog.current.close() }}>Clear history</button>
+        </div>
+      </dialog>
       <h2>Your top genres</h2>
       <ol className="top-genres">
         {top.map(([g, n]) => (
