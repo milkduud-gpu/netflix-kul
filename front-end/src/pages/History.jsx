@@ -1,14 +1,13 @@
 import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../context.jsx'
-import { MOVIES } from '../data.js'
 import { posterStyle } from '../components/Poster.jsx'
 
 export default function History() {
-  const { watched, clearHistory } = useApp()
+  const { watched, clearHistory, movies } = useApp()
   const dialog = useRef(null)
   const items = watched
-    .map((w) => ({ ...w, movie: MOVIES.find((m) => m.id === w.id) }))
+    .map((w) => ({ ...w, movie: movies.find((m) => m.id === w.id) }))
     .filter((w) => w.movie)
 
   if (items.length === 0) {

@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
 import { useApp } from '../context.jsx'
-import { GENRES, MOVIES } from '../data.js'
+import { GENRES } from '../data.js'
 import Row from '../components/Row.jsx'
 import Poster from '../components/Poster.jsx'
 import { posterStyle } from '../components/Poster.jsx'
 
 export default function Home() {
-  const { watched, watch } = useApp()
-  const featured = MOVIES.find((m) => m.id === 13)
-  const continueWatching = watched.map((w) => MOVIES.find((m) => m.id === w.id)).filter(Boolean)
+  const { watched, watch, movies } = useApp()
+  const featured = movies.find((m) => m.id === 13)
+  if (!featured) return null
+  const continueWatching = watched.map((w) => movies.find((m) => m.id === w.id)).filter(Boolean)
 
   return (
     <>
@@ -29,7 +30,7 @@ export default function Home() {
         <section className="row">
           <h2>Top 10 Movies Today</h2>
           <div className="row-scroll">
-            {[...MOVIES].sort((a, b) => b.year - a.year).slice(0, 10).map((m, i) => (
+            {[...movies].sort((a, b) => b.year - a.year).slice(0, 10).map((m, i) => (
               <div key={m.id} className="ranked">
                 <span className="rank" aria-hidden="true">{i + 1}</span>
                 <Poster movie={m} />
@@ -38,7 +39,7 @@ export default function Home() {
           </div>
         </section>
         {GENRES.map((g) => (
-          <Row key={g} title={g} movies={MOVIES.filter((m) => m.genre === g)} />
+          <Row key={g} title={g} movies={movies.filter((m) => m.genre === g)} />
         ))}
       </div>
       <footer className="footer">

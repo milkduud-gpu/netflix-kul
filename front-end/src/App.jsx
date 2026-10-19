@@ -10,7 +10,7 @@ import MovieDetail from './pages/MovieDetail.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function Protected() {
-  const { user } = useApp()
+  const { user, moviesLoading } = useApp()
   const location = useLocation()
   if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
   return (
@@ -18,7 +18,7 @@ function Protected() {
       <a href="#main" className="skip">Skip to content</a>
       <Navbar />
       <main id="main" tabIndex={-1} key={location.pathname}>
-        <Outlet />
+        {moviesLoading ? null : <Outlet />}
       </main>
     </>
   )

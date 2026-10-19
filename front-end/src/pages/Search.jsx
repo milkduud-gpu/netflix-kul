@@ -1,8 +1,9 @@
+import { useApp } from '../context.jsx'
 import { Link, useSearchParams } from 'react-router-dom'
-import { MOVIES } from '../data.js'
 import Poster from '../components/Poster.jsx'
 
 export default function Search() {
+  const { movies } = useApp()
   const [params] = useSearchParams()
   const q = (params.get('q') ?? '').trim().toLowerCase()
   if (!q) {
@@ -13,7 +14,7 @@ export default function Search() {
       </div>
     )
   }
-  const results = MOVIES.filter((m) => m.title.toLowerCase().includes(q) || m.genre.toLowerCase().includes(q))
+  const results = movies.filter((m) => m.title.toLowerCase().includes(q) || m.genre.toLowerCase().includes(q))
 
   return (
     <div className="page">

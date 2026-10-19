@@ -1,13 +1,12 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useApp } from '../context.jsx'
-import { MOVIES } from '../data.js'
 import { posterStyle } from '../components/Poster.jsx'
 
 export default function MovieDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { watched, watch } = useApp()
-  const movie = MOVIES.find((m) => String(m.id) === id)
+  const { watched, watch, movies } = useApp()
+  const movie = movies.find((m) => String(m.id) === id)
 
   if (!movie) {
     return (
