@@ -12,5 +12,3 @@ export const toMovie = (r) => ({
   poster: `${BASE}${r.poster_path}`,
   description: r.description,
 })
-
-export const DEMO_USER = { email: 'demo@netflix.kul', password: 'password123' }

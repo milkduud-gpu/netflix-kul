@@ -60,7 +60,7 @@ export default function Navbar() {
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="10" cy="10" r="7" /><path d="M21 21l-6-6" /></svg>
         </button>
         <button className="avatar" onClick={logout} title={`Sign out ${user.email}`} aria-label="Sign out">
-          D
+          {user.email?.[0]?.toUpperCase() ?? '?'}
         </button>
       </div>
     </header>

@@ -10,8 +10,9 @@ import MovieDetail from './pages/MovieDetail.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function Protected() {
-  const { user, moviesLoading } = useApp()
+  const { user, authLoading, moviesLoading } = useApp()
   const location = useLocation()
+  if (authLoading) return null
   if (!user) return <Navigate to="/login" replace state={{ from: location.pathname }} />
   return (
     <>
