@@ -1,12 +1,20 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useApp } from '../context.jsx'
 import { GENRES } from '../data.js'
 import Row from '../components/Row.jsx'
 import Poster from '../components/Poster.jsx'
 import { posterStyle } from '../components/Poster.jsx'
+import { helloWorld } from '../lib/functions.js'
 
 export default function Home() {
   const { watched, watch, movies } = useApp()
+  const [greeting, setGreeting] = useState('')
+  useEffect(() => {
+    helloWorld()
+      .then((d) => setGreeting(typeof d === 'string' ? d : d?.message ?? JSON.stringify(d)))
+      .catch(() => {})
+  }, [])
   const featured = movies.find((m) => m.id === 13)
   if (!featured) return null
   const continueWatching = watched.map((w) => movies.find((m) => m.id === w.id)).filter(Boolean)
@@ -17,6 +25,7 @@ export default function Home() {
         <div className="hero-shade" />
         <img className="hero-poster" src={featured.poster} alt="" />
         <div className="hero-body">
+          {greeting && <p className="hero-greeting">{greeting}</p>}
           <h1>{featured.title}</h1>
           <p>{featured.description}</p>
           <div className="hero-actions">
