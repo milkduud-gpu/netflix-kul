@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { toMovie } from './data.js'
 import { supabase } from './lib/supabase.js'
+import { withTmdb } from './lib/tmdb.js'
 
 const AppContext = createContext(null)
 
@@ -44,9 +45,15 @@ export function AppProvider({ children }) {
     }
     setMoviesLoading(true)
     supabase.from('movies').select('*').order('id').then(({ data, error }) => {
-      if (error) console.error('Failed to load movies', error)
-      else setMovies(data.map(toMovie))
+      if (error) {
+        console.error('Failed to load movies', error)
+        setMoviesLoading(false)
+        return
+      }
+      const base = data.map(toMovie)
+      setMovies(base) // show local posters right away, then swap in TMDB data
       setMoviesLoading(false)
+      withTmdb(base).then(setMovies)
     })
     loadHistory()
   }, [userId])
