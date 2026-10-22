@@ -7,6 +7,7 @@ import History from './pages/History.jsx'
 import Genres from './pages/Genres.jsx'
 import Search from './pages/Search.jsx'
 import MovieDetail from './pages/MovieDetail.jsx'
+import Checkout from './pages/Checkout.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function Protected() {
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/genres/:name" element={<Genres />} />
         <Route path="/search" element={<Search />} />
         <Route path="/movie/:id" element={<MovieDetail />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
