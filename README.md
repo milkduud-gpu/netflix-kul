@@ -12,3 +12,4 @@ npm run dev
 ## Structure
 - `front-end/` — React + Vite app
 - `supabase/` — database schema, seed data and backups
+# netflix-frontend
