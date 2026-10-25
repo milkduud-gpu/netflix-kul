@@ -6,3 +6,5 @@ export default defineConfig(({ command }) => ({
   base: command === 'build' && !process.env.VERCEL ? '/netflix-kul/' : '/',
   plugins: [react()],
 }))
+
+//im a comment 
